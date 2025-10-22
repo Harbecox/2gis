@@ -6,11 +6,17 @@ import re
 import time
 import brotli
 
+from pyvirtualdisplay import Display
 from seleniumwire import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import tempfile
+
+
+display = Display(visible=0, size=(1920, 1080))
+display.start()
+
 options = Options()
 
 options.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")
@@ -23,10 +29,11 @@ driver = webdriver.Chrome(options=options)
 with open('urls.json','r',encoding='utf-8') as url_file:
     search_urls = json.loads(url_file.read())
     for index,url in enumerate(search_urls):
+        print(1,url)
         driver.get(url)
         match = re.search(r'"pages"\s*:\s*(\d+)\s*,\s*"total"', driver.page_source)
         pages = int(match.group(1))
-
+        print(2,pages)
         urls = []
         pattern = re.compile(r"^https://2gis\.ru/.+?/firm/.+")
 
