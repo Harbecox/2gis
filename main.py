@@ -12,7 +12,11 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 import tempfile
 options = Options()
-# options.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")
+
+options.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")
+options.add_argument("--headless=new")  # если сервер без GUI
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
 
 driver = webdriver.Chrome(options=options)
 
