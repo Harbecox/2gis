@@ -9,8 +9,12 @@ import brotli
 from seleniumwire import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+import tempfile
+options = Options()
+options.add_argument(f"--user-data-dir={tempfile.mkdtemp()}")
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=options)
 
 with open('urls.json','r',encoding='utf-8') as url_file:
     search_urls = json.loads(url_file.read())
