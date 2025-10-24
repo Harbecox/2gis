@@ -38,7 +38,8 @@ for i,url in enumerate(all_data):
     print(i+1,"\t",len(all_data))
     url = 'https://2gis.ru' + url
     name = "htmls/" + url.split("/")[-1] + ".html"
-    if i < 3550:
+    #9200
+    if i < 9010:
         continue
     driver.get(url)
     with open(name,'w') as f:
